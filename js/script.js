@@ -53,11 +53,24 @@ todoForm.addEventListener('submit', (e) => {
 })
 
 document.addEventListener('click', (e) => {
+
     const targetEl = e.target
+    const targetValue = targetEl.classList.value;
     const parentEl = targetEl.closest('div')
-    if (targetEl.classList.contains('finish-todo')) {
-        parentEl.classList.toggle('done')
+
+
+
+    if (targetValue == 'remove-todo') {
+        parentEl.remove()
     }
 
-    console.log(parentEl)
+    if (targetValue == 'finish-todo') {
+        parentEl.classList.toggle('done')
+
+    }
+    if (targetValue == 'edit-todo') {
+        console.log('editou')
+    }
+
+
 })
