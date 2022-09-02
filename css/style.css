@@ -162,10 +162,11 @@ select {
 
 .done {
     background: 0.4rem;
+    /* background-color: #102f5e; */
 }
 
 .done h3 {
-    color: #fff;
+    /* color: white; */
     text-decoration: line-through;
     font-style: italic;
 }
