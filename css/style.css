@@ -169,3 +169,15 @@ select {
     text-decoration: line-through;
     font-style: italic;
 }
+
+@media screen and (max-width: 860px) {
+    body {
+        background-size: auto;
+    }
+}
+
+@media screen and (max-width: 490px) {
+    .todo-container {
+        width: 350px;
+    }
+}
