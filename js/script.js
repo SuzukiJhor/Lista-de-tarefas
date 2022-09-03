@@ -1,13 +1,15 @@
+const todoContainer = document.querySelector('.todo-container')
 const todoForm = document.querySelector('#todo-form')
 const todoInput = document.querySelector('#todo-input')
 const todoList = document.querySelector('#todo-list')
-const editForm = document.querySelector('#edit-form')
+const editForm = document.querySelector('.edit')
 const editInput = document.querySelector('#edit-input')
 const cancelEditBtn = document.querySelector('#cancel-edit-btn')
 const searchInput = document.querySelector('#search-input')
 const eraseBtn = document.querySelector('#erase-button')
 const filterBtn = document.querySelector('#filter-select')
 
+// Funçoes
 
 function saveTodo(text) {
 
@@ -42,6 +44,15 @@ function saveTodo(text) {
 
 }
 
+function toggleForms() {
+    editForm.classList.toggle('hide')
+    todoContainer.classList.toggle('hide')
+
+}
+
+
+// Eventoss
+
 todoForm.addEventListener('submit', (e) => {
     e.preventDefault();
 
@@ -69,7 +80,8 @@ document.addEventListener('click', (e) => {
 
     }
     if (targetValue == 'edit-todo') {
-        console.log('editou')
+        toggleForms()
+        console.log(e.target)
     }
 
 
