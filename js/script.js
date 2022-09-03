@@ -50,6 +50,20 @@ function toggleForms() {
 
 }
 
+function updateTodo(text) {
+    const todos = document.querySelectorAll('.todo')
+
+    todos.forEach((todo) => {
+        let todoTitle = todo.querySelector('h3')
+
+        todoTitle.innerText = text
+
+        console.log(todoTitle)
+
+        // if (todoTitle.innerText === )
+    })
+}
+
 
 // Eventoss
 
@@ -69,6 +83,14 @@ document.addEventListener('click', (e) => {
     const targetValue = targetEl.classList.value;
     const parentEl = targetEl.closest('div')
 
+    let todoTitle;
+
+    if (parentEl && parentEl.querySelector('h3')) {
+        todoTitle = parentEl.querySelector('h3').innerText
+
+    }
+
+
 
 
     if (targetValue == 'remove-todo') {
@@ -81,8 +103,25 @@ document.addEventListener('click', (e) => {
     }
     if (targetValue == 'edit-todo') {
         toggleForms()
-        console.log(e.target)
-    }
+        editInput.value = todoTitle
 
+    }
+})
+
+cancelEditBtn.addEventListener('click', (e) => {
+    e.preventDefault()
+
+    toggleForms()
+})
+
+editForm.addEventListener('submit', (e) => {
+    e.preventDefault()
+
+    const newEditInput = editInput.value
+    if (newEditInput) {
+        updateTodo(newEditInput)
+
+    }
+    toggleForms()
 
 })
