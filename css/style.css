@@ -103,13 +103,12 @@ select {
 /* Edit Form  */
 
 .edit {
-    margin: 25rem auto 0;
+    margin: 20rem auto 0;
     background-color: #fdfdfd;
     padding: 1.5rem;
     border-radius: 15px;
     max-width: 350px;
     max-height: 150px;
-    align-items: center;
     justify-content: center;
 }
 

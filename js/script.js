@@ -9,6 +9,8 @@ const searchInput = document.querySelector('#search-input')
 const eraseBtn = document.querySelector('#erase-button')
 const filterBtn = document.querySelector('#filter-select')
 
+let oldEditInput;
+
 // Funçoes
 
 function saveTodo(text) {
@@ -51,16 +53,17 @@ function toggleForms() {
 }
 
 function updateTodo(text) {
-    const todos = document.querySelectorAll('.todo')
+    let todos = document.querySelectorAll('.todo')
 
     todos.forEach((todo) => {
         let todoTitle = todo.querySelector('h3')
 
-        todoTitle.innerText = text
+        console.log(oldEditInput, todoTitle)
 
-        console.log(todoTitle)
+        if (oldEditInput == todoTitle.innerText)
 
-        // if (todoTitle.innerText === )
+            todoTitle.innerText = text
+
     })
 }
 
@@ -104,6 +107,7 @@ document.addEventListener('click', (e) => {
     if (targetValue == 'edit-todo') {
         toggleForms()
         editInput.value = todoTitle
+        oldEditInput = todoTitle
 
     }
 })
