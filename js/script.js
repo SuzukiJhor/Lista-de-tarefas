@@ -49,72 +49,57 @@ function saveTodo(text) {
 function toggleForms() {
     editForm.classList.toggle('hide')
     todoContainer.classList.toggle('hide')
-
 }
 
 function updateTodo(text) {
     let todos = document.querySelectorAll('.todo')
-
     todos.forEach((todo) => {
+
         let todoTitle = todo.querySelector('h3')
 
-        console.log(oldEditInput, todoTitle)
-
         if (oldEditInput == todoTitle.innerText)
-
             todoTitle.innerText = text
-
     })
 }
-
 
 // Eventoss
 
 todoForm.addEventListener('submit', (e) => {
     e.preventDefault();
 
-    const inputValue = todoInput.value
+    const inputValue = todoInput.value.trim()
+
     if (inputValue) {
         saveTodo(inputValue)
     }
-
 })
 
 document.addEventListener('click', (e) => {
 
     const targetEl = e.target
-    const targetValue = targetEl.classList.value;
+    const targetClass = targetEl.classList.value;
     const parentEl = targetEl.closest('div')
 
     let todoTitle;
 
     if (parentEl && parentEl.querySelector('h3')) {
         todoTitle = parentEl.querySelector('h3').innerText
-
     }
-
-
-
-
-    if (targetValue == 'remove-todo') {
+    if (targetClass == 'remove-todo') {
         parentEl.remove()
     }
-
-    if (targetValue == 'finish-todo') {
+    if (targetClass == 'finish-todo') {
         parentEl.classList.toggle('done')
-
     }
-    if (targetValue == 'edit-todo') {
+    if (targetClass == 'edit-todo') {
         toggleForms()
-        editInput.value = todoTitle
-        oldEditInput = todoTitle
-
+        editInput.value = todoTitle.trim()
+        oldEditInput = todoTitle.trim()
     }
 })
 
 cancelEditBtn.addEventListener('click', (e) => {
     e.preventDefault()
-
     toggleForms()
 })
 
@@ -122,10 +107,9 @@ editForm.addEventListener('submit', (e) => {
     e.preventDefault()
 
     const newEditInput = editInput.value
+
     if (newEditInput) {
         updateTodo(newEditInput)
-
     }
     toggleForms()
-
 })
