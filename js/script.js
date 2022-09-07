@@ -10,6 +10,7 @@ const eraseBtn = document.querySelector('#erase-button')
 const filterBtn = document.querySelector('#filter-select')
 
 let oldEditInput;
+let arrayDone;
 
 // Funçoes
 
@@ -43,7 +44,6 @@ function saveTodo(text) {
     todoInput.value = ''
     todoInput.focus()
 
-
 }
 
 function toggleForms() {
@@ -59,6 +59,33 @@ function updateTodo(text) {
 
         if (oldEditInput == todoTitle.innerText)
             todoTitle.innerText = text
+    })
+}
+
+function showDone() {
+    let todos = document.querySelectorAll('.todo')
+    todos.forEach((item) => {
+        item.classList.add('hide')
+    })
+
+    let done = document.querySelectorAll('.done')
+    done.forEach((item) => {
+        item.classList.remove('hide')
+    })
+
+}
+
+function showAll() {
+    let todo = document.querySelectorAll('.todo')
+    todo.forEach((item) => {
+        item.classList.remove('hide')
+    })
+}
+
+function showTodo() {
+    let done = document.querySelectorAll('.done')
+    done.forEach((item) => {
+        item.classList.add('hide')
     })
 }
 
@@ -112,4 +139,22 @@ editForm.addEventListener('submit', (e) => {
         updateTodo(newEditInput)
     }
     toggleForms()
+})
+
+filterBtn.addEventListener('click', (e) => {
+    e.preventDefault()
+
+    let selectValue = filterBtn.options[filterBtn.selectedIndex].value
+
+    if (selectValue === 'done') {
+        showDone()
+    }
+
+    if (selectValue == 'todo') {
+        showTodo()
+    }
+
+    if (selectValue == 'all') {
+        showAll()
+    }
 })

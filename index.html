@@ -17,7 +17,7 @@
 
         <div class="todo-container">
             <header>
-                <h1>To-Do</h1>
+                <h1>Lista de tarefas</h1>
             </header>
             <form action="" id="todo-form">
                 <p>Adicione sua tarefa</p>
@@ -46,7 +46,7 @@
                 <div id="filter">
                     <h4>Filtrar:</h4>
                     <select name="" id="filter-select">
-                    <option value="all">Todos</option>
+                    <option value="all" selected>Todos</option>
                     <option value="done">Feitos</option>
                     <option value="todo">A fazer</option>
                 </select>
@@ -59,6 +59,42 @@
 
                 <div class="todo">
                     <h3>Estou fazendo algo aqui...</h3>
+                    <button class="finish-todo">
+                    <i class="fa-solid fa-check"></i>
+                    </button>
+                    <button class="edit-todo">
+                    <i class="fa-solid fa-pen"></i>
+                    </button>
+                    <button class="remove-todo">
+                    <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
+                <div class="todo">
+                    <h3>teste</h3>
+                    <button class="finish-todo">
+                    <i class="fa-solid fa-check"></i>
+                    </button>
+                    <button class="edit-todo">
+                    <i class="fa-solid fa-pen"></i>
+                    </button>
+                    <button class="remove-todo">
+                    <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
+                <div class="todo">
+                    <h3>teste 2</h3>
+                    <button class="finish-todo">
+                    <i class="fa-solid fa-check"></i>
+                    </button>
+                    <button class="edit-todo">
+                    <i class="fa-solid fa-pen"></i>
+                    </button>
+                    <button class="remove-todo">
+                    <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
+                <div class="todo">
+                    <h3>teste 3</h3>
                     <button class="finish-todo">
                     <i class="fa-solid fa-check"></i>
                     </button>
@@ -82,7 +118,7 @@
                     <i class="fa-solid fa-check-double"></i>
                 </button>
                 </div>
-                <button type='reset' id="cancel-edit-btn">Cancelar</button>
+                <button class='cancel-btn' type='reset' id="cancel-edit-btn">Cancelar</button>
             </form>
         </div>
 
