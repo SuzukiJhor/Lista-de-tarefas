@@ -1,6 +1,6 @@
 # To-Do
 
-Projeto lista de afazeres, criado utilizando html, css e JavaScript puro.
+Projeto lista de afazeres, criado utilizando html, css e JavaScript.
 
 # Apresentação:
 
