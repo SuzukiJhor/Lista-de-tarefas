@@ -2,7 +2,7 @@
 
 Projeto lista de afazeres, desenvolvido com html, css e JavaScript!
 </br>
-Este To-do possui opção de filtragem e de busca de tarefa na lista de afazeres.
+Este To-do possui opção de filtragem e de busca de tarefa na lista.
 </br>
 =======
 # Apresentação:
