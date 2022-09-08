@@ -9,8 +9,9 @@ const searchInput = document.querySelector('#search-input')
 const eraseBtn = document.querySelector('#erase-button')
 const filterBtn = document.querySelector('#filter-select')
 
+
+
 let oldEditInput;
-let arrayDone;
 
 // Funçoes
 
@@ -52,8 +53,9 @@ function toggleForms() {
 }
 
 function updateTodo(text) {
-    let todos = document.querySelectorAll('.todo')
+    const todos = document.querySelectorAll('.todo')
     todos.forEach((todo) => {
+
 
         let todoTitle = todo.querySelector('h3')
 
@@ -62,34 +64,45 @@ function updateTodo(text) {
     })
 }
 
-function showDone() {
-    let todos = document.querySelectorAll('.todo')
-    todos.forEach((item) => {
-        item.classList.add('hide')
-    })
+const show = {
+    showDone: function() {
+        const todos = document.querySelectorAll('.todo')
+        todos.forEach((item) => {
+            item.classList.add('hide')
+        })
 
-    let done = document.querySelectorAll('.done')
-    done.forEach((item) => {
-        item.classList.remove('hide')
-    })
+        let done = document.querySelectorAll('.done')
+        done.forEach((item) => {
+            item.classList.remove('hide')
 
+        })
+    },
+
+    showAll: function() {
+        const todos = document.querySelectorAll('.todo')
+        todos.forEach((item) => {
+            item.classList.remove('hide')
+        })
+    },
+
+    showTodo: function() {
+        const todos = document.querySelectorAll('.todo')
+        todos.forEach((item) => {
+            item.classList.remove('hide')
+        })
+
+        let done = document.querySelectorAll('.done')
+        done.forEach((item) => {
+            item.classList.add('hide')
+        })
+
+    }
 }
 
-function showAll() {
-    let todo = document.querySelectorAll('.todo')
-    todo.forEach((item) => {
-        item.classList.remove('hide')
-    })
-}
 
-function showTodo() {
-    let done = document.querySelectorAll('.done')
-    done.forEach((item) => {
-        item.classList.add('hide')
-    })
-}
+// Eventos
 
-// Eventoss
+
 
 todoForm.addEventListener('submit', (e) => {
     e.preventDefault();
@@ -98,6 +111,7 @@ todoForm.addEventListener('submit', (e) => {
 
     if (inputValue) {
         saveTodo(inputValue)
+
     }
 })
 
@@ -147,14 +161,29 @@ filterBtn.addEventListener('click', (e) => {
     let selectValue = filterBtn.options[filterBtn.selectedIndex].value
 
     if (selectValue === 'done') {
-        showDone()
+        show.showDone()
     }
 
     if (selectValue == 'todo') {
-        showTodo()
+        show.showTodo()
     }
 
     if (selectValue == 'all') {
-        showAll()
+        show.showAll()
     }
+})
+
+eraseBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+
+    let searchValue = searchInput.value
+    console.log(searchValue);
+    const todos = document.querySelectorAll('.todo')
+    todos.forEach((item) => {
+        item.classList.add('hide')
+        if (searchValue.trim() == item.innerText.trim()) {
+            item.classList.remove('hide')
+        }
+    })
+
 })
