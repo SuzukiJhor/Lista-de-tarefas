@@ -10,11 +10,30 @@ const eraseBtn = document.querySelector('#erase-button')
 const filterBtn = document.querySelector('#filter-select')
 
 
-
 let oldEditInput;
+
 
 // Funçoes
 
+//Funçao para regitrar tarefas no localStorage
+function storageUpdate(item) {
+    localStorage.setItem(item, JSON.stringify(item))
+    showDisplay()
+}
+
+function showDisplay() {
+    todoList.innerText = ''
+    let keys = Object.keys(localStorage)
+    keys.sort()
+    console.log(keys)
+    keys.forEach((item) => {
+        saveTodo(item)
+    })
+
+
+}
+
+//Funcao para salvar tarefas e adicionar um item a lista de tarefas.
 function saveTodo(text) {
 
     const todo = document.createElement('div')
@@ -44,26 +63,29 @@ function saveTodo(text) {
 
     todoInput.value = ''
     todoInput.focus()
-
 }
 
+//Funcao para mostrar o formulário de edicao.
 function toggleForms() {
     editForm.classList.toggle('hide')
     todoContainer.classList.toggle('hide')
 }
 
+//Funcao para editar item na lista de tarefas.
 function updateTodo(text) {
     const todos = document.querySelectorAll('.todo')
     todos.forEach((todo) => {
-
 
         let todoTitle = todo.querySelector('h3')
 
         if (oldEditInput == todoTitle.innerText)
             todoTitle.innerText = text
+        localStorage.removeItem(oldEditInput)
+        storageUpdate(text)
     })
 }
 
+//Funcao para mostrar os itens selecionados de acordo com o botao de filtragem
 const show = {
     showDone: function() {
         const todos = document.querySelectorAll('.todo')
@@ -99,24 +121,42 @@ const show = {
     }
 }
 
-
 // Eventos
+//Adicionando evento no botão de pesquisa.
+eraseBtn.addEventListener('click', (e) => {
+    e.preventDefault();
 
+    if (searchInput.value) {
+        const todos = document.querySelectorAll('.todo')
+        console.log(todos)
+        todos.forEach((item) => {
+            item.classList.add('hide')
 
+            if (searchInput.value.trim() == item.innerText.trim()) {
+                item.classList.remove('hide')
+            }
 
+        })
+    }
+    if (!searchInput.value) {
+        alert('O campo de busca esta vazio')
+    }
+})
+
+//Adicionando evento no formulário principal.
 todoForm.addEventListener('submit', (e) => {
     e.preventDefault();
 
     const inputValue = todoInput.value.trim()
 
     if (inputValue) {
-        saveTodo(inputValue)
-
+        // saveTodo(inputValue)
+        storageUpdate(inputValue)
     }
 })
 
+//Adicionando evento no documento, mapeando as classes dos elementos selecionados.
 document.addEventListener('click', (e) => {
-
     const targetEl = e.target
     const targetClass = targetEl.classList.value;
     const parentEl = targetEl.closest('div')
@@ -128,6 +168,7 @@ document.addEventListener('click', (e) => {
     }
     if (targetClass == 'remove-todo') {
         parentEl.remove()
+        localStorage.removeItem(parentEl.innerText)
     }
     if (targetClass == 'finish-todo') {
         parentEl.classList.toggle('done')
@@ -139,11 +180,7 @@ document.addEventListener('click', (e) => {
     }
 })
 
-cancelEditBtn.addEventListener('click', (e) => {
-    e.preventDefault()
-    toggleForms()
-})
-
+//Adicionando evento no formulário de edicao.
 editForm.addEventListener('submit', (e) => {
     e.preventDefault()
 
@@ -155,6 +192,13 @@ editForm.addEventListener('submit', (e) => {
     toggleForms()
 })
 
+//Adicionando evento no botao de cancelar edição
+cancelEditBtn.addEventListener('click', (e) => {
+    e.preventDefault()
+    toggleForms()
+})
+
+//Adicionando evento no botao de filtragem.
 filterBtn.addEventListener('click', (e) => {
     e.preventDefault()
 
@@ -173,17 +217,4 @@ filterBtn.addEventListener('click', (e) => {
     }
 })
 
-eraseBtn.addEventListener('click', (e) => {
-    e.preventDefault();
-
-    let searchValue = searchInput.value
-    console.log(searchValue);
-    const todos = document.querySelectorAll('.todo')
-    todos.forEach((item) => {
-        item.classList.add('hide')
-        if (searchValue.trim() == item.innerText.trim()) {
-            item.classList.remove('hide')
-        }
-    })
-
-})
+showDisplay()
