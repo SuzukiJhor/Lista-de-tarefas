@@ -8,7 +8,7 @@ body {
     margin: 0;
 }
 
-.container-imagem {
+.container-image {
     display: flex;
     position: relative;
     height: 100vh;

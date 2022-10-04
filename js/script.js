@@ -1,14 +1,16 @@
 const todoContainer = document.querySelector('.todo-container')
 const todoForm = document.querySelector('#todo-form')
 const todoInput = document.querySelector('#todo-input')
-const todoList = document.querySelector('#todo-list')
+
 const editForm = document.querySelector('.edit')
 const editInput = document.querySelector('#edit-input')
 const cancelEditBtn = document.querySelector('#cancel-edit-btn')
 const searchInput = document.querySelector('#search-input')
 const eraseBtn = document.querySelector('#erase-button')
 const filterBtn = document.querySelector('#filter-select')
+const image = document.querySelector('.container-imagem')
 
+console.log(image)
 
 let oldEditInput;
 
@@ -18,30 +20,25 @@ let oldEditInput;
 //Funçao para regitrar tarefas no localStorage
 function storageUpdate(item) {
     localStorage.setItem(item, JSON.stringify(item))
-    showDisplay()
+    clearFields()
 }
 
-function showDisplay() {
-    todoList.innerText = ''
+function clearFields() {
+    // todoList.innerText = ''
     let keys = Object.keys(localStorage)
     keys.sort()
     console.log(keys)
     keys.forEach((item) => {
-        saveTodo(item)
+        createTodo(item)
     })
-
-
 }
 
-//Funcao para salvar tarefas e adicionar um item a lista de tarefas.
-function saveTodo(text) {
-
+function createTodo(text) {
     const todo = document.createElement('div')
     todo.classList.add('todo')
 
     const todoTitle = document.createElement('h3')
     todoTitle.innerText = text;
-
     todo.appendChild(todoTitle);
 
     const doneBtn = document.createElement('button')
@@ -59,7 +56,7 @@ function saveTodo(text) {
     deleteBtn.innerHTML = "<i class='fa-solid fa-xmark '></i>"
     todo.appendChild(deleteBtn)
 
-    todoList.appendChild(todo)
+    document.querySelector('#todo-list').appendChild(todo)
 
     todoInput.value = ''
     todoInput.focus()
@@ -85,7 +82,7 @@ function updateTodo(text) {
     })
 }
 
-//Funcao para mostrar os itens selecionados de acordo com o botao de filtragem
+
 const show = {
     showDone: function() {
         const todos = document.querySelectorAll('.todo')
@@ -121,8 +118,7 @@ const show = {
     }
 }
 
-// Eventos
-//Adicionando evento no botão de pesquisa.
+
 eraseBtn.addEventListener('click', (e) => {
     e.preventDefault();
 
@@ -143,28 +139,28 @@ eraseBtn.addEventListener('click', (e) => {
     }
 })
 
-//Adicionando evento no formulário principal.
-todoForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-
+const updateInput = event => {
+    event.preventDefault()
     const inputValue = todoInput.value.trim()
 
     if (inputValue) {
         // saveTodo(inputValue)
         storageUpdate(inputValue)
     }
-})
+}
 
-//Adicionando evento no documento, mapeando as classes dos elementos selecionados.
-document.addEventListener('click', (e) => {
-    const targetEl = e.target
+todoForm.addEventListener('submit', updateInput)
+
+const selectClasses = event => {
+    event.preventDefault()
+    const targetEl = event.target
     const targetClass = targetEl.classList.value;
     const parentEl = targetEl.closest('div')
-
     let todoTitle;
 
     if (parentEl && parentEl.querySelector('h3')) {
         todoTitle = parentEl.querySelector('h3').innerText
+
     }
     if (targetClass == 'remove-todo') {
         parentEl.remove()
@@ -178,30 +174,21 @@ document.addEventListener('click', (e) => {
         editInput.value = todoTitle.trim()
         oldEditInput = todoTitle.trim()
     }
-})
 
-//Adicionando evento no formulário de edicao.
-editForm.addEventListener('submit', (e) => {
-    e.preventDefault()
+}
 
+const editTask = event => {
+    event.preventDefault()
     const newEditInput = editInput.value
 
     if (newEditInput) {
         updateTodo(newEditInput)
     }
     toggleForms()
-})
+}
 
-//Adicionando evento no botao de cancelar edição
-cancelEditBtn.addEventListener('click', (e) => {
-    e.preventDefault()
-    toggleForms()
-})
-
-//Adicionando evento no botao de filtragem.
-filterBtn.addEventListener('click', (e) => {
-    e.preventDefault()
-
+const filterTask = event => {
+    event.preventDefault()
     let selectValue = filterBtn.options[filterBtn.selectedIndex].value
 
     if (selectValue === 'done') {
@@ -215,6 +202,14 @@ filterBtn.addEventListener('click', (e) => {
     if (selectValue == 'all') {
         show.showAll()
     }
-})
+}
 
-showDisplay()
+document.addEventListener('click', selectClasses)
+
+editForm.addEventListener('submit', editTask)
+
+cancelEditBtn.addEventListener('click', toggleForms)
+
+filterBtn.addEventListener('click', filterTask)
+
+clearFields()
