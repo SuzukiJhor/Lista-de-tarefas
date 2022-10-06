@@ -1,39 +1,41 @@
+const formTodo = document.querySelector('#todo-form')
+const formTodoInput = document.querySelector('#todo-input')
+const formSearch = document.querySelector('#search form')
+
+
+const searchInput = document.querySelector('#search-input')
+
 const todoContainer = document.querySelector('.todo-container')
-const todoForm = document.querySelector('#todo-form')
-const todoInput = document.querySelector('#todo-input')
 
 const editForm = document.querySelector('.edit')
 const editInput = document.querySelector('#edit-input')
 const cancelEditBtn = document.querySelector('#cancel-edit-btn')
-const searchInput = document.querySelector('#search-input')
-const eraseBtn = document.querySelector('#erase-button')
+const searchBtn = document.querySelector('#search-button')
 const filterBtn = document.querySelector('#filter-select')
 const image = document.querySelector('.container-imagem')
 
-console.log(image)
-
 let oldEditInput;
 
+const setTodo = event => {
+    event.preventDefault()
 
-// Funçoes
+    const todoText = formTodoInput.value.trim()
+    if (todoText.length) {
+        storageUpdate(todoText)
+    }
 
-//Funçao para regitrar tarefas no localStorage
-function storageUpdate(item) {
+    event.target.reset()
+}
+
+
+const storageUpdate = item => {
     localStorage.setItem(item, JSON.stringify(item))
-    clearFields()
+
+    let keys = JSON.parse(localStorage.getItem(item))
+    createTodoScreen(keys)
 }
 
-function clearFields() {
-    // todoList.innerText = ''
-    let keys = Object.keys(localStorage)
-    keys.sort()
-    console.log(keys)
-    keys.forEach((item) => {
-        createTodo(item)
-    })
-}
-
-function createTodo(text) {
+const createTodoScreen = text => {
     const todo = document.createElement('div')
     todo.classList.add('todo')
 
@@ -57,18 +59,14 @@ function createTodo(text) {
     todo.appendChild(deleteBtn)
 
     document.querySelector('#todo-list').appendChild(todo)
-
-    todoInput.value = ''
-    todoInput.focus()
 }
 
-//Funcao para mostrar o formulário de edicao.
+
 function toggleForms() {
     editForm.classList.toggle('hide')
     todoContainer.classList.toggle('hide')
 }
 
-//Funcao para editar item na lista de tarefas.
 function updateTodo(text) {
     const todos = document.querySelectorAll('.todo')
     todos.forEach((todo) => {
@@ -81,7 +79,6 @@ function updateTodo(text) {
         storageUpdate(text)
     })
 }
-
 
 const show = {
     showDone: function() {
@@ -118,38 +115,21 @@ const show = {
     }
 }
 
-
-eraseBtn.addEventListener('click', (e) => {
-    e.preventDefault();
-
+const searchTask = event => {
+    event.preventDefault()
     if (searchInput.value) {
         const todos = document.querySelectorAll('.todo')
-        console.log(todos)
         todos.forEach((item) => {
             item.classList.add('hide')
-
             if (searchInput.value.trim() == item.innerText.trim()) {
                 item.classList.remove('hide')
             }
-
         })
     }
     if (!searchInput.value) {
         alert('O campo de busca esta vazio')
     }
-})
-
-const updateInput = event => {
-    event.preventDefault()
-    const inputValue = todoInput.value.trim()
-
-    if (inputValue) {
-        // saveTodo(inputValue)
-        storageUpdate(inputValue)
-    }
 }
-
-todoForm.addEventListener('submit', updateInput)
 
 const selectClasses = event => {
     event.preventDefault()
@@ -204,7 +184,19 @@ const filterTask = event => {
     }
 }
 
-document.addEventListener('click', selectClasses)
+const initial = () => {
+    const keys = Object.keys(localStorage)
+    keys.sort()
+    keys.forEach((item) => {
+        createTodoScreen(item)
+    })
+}
+
+// document.addEventListener('click', selectClasses)
+
+formTodo.addEventListener('submit', setTodo)
+
+formSearch.addEventListener('submit', searchTask)
 
 editForm.addEventListener('submit', editTask)
 
@@ -212,4 +204,4 @@ cancelEditBtn.addEventListener('click', toggleForms)
 
 filterBtn.addEventListener('click', filterTask)
 
-clearFields()
+initial()
