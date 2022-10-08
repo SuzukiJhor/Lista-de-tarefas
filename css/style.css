@@ -10,7 +10,6 @@ body {
 
 .container-image {
     display: flex;
-    position: relative;
     height: 100vh;
     width: 100vw;
     background-image: url("/img/fundoEditado.png");
@@ -105,6 +104,16 @@ select {
 
 
 /* Edit Form  */
+
+.container-edit {
+    display: flex;
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, .6);
+    justify-content: center;
+    align-items: center;
+}
 
 .edit {
     /* margin: 20rem auto 0; */

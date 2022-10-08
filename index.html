@@ -29,9 +29,6 @@
                 </div>
             </form>
 
-
-
-
             <div id="toolbar">
                 <div id="search">
                     <h4>Pesquisar:</h4>
@@ -52,49 +49,28 @@
                 </select>
                 </div>
             </div>
+
             <div id="todo-list">
+            </div>
 
-                <!-- Template -->
-                <div class="todo">
-                    <h3>teste 2</h3>
-                    <button class="finish-todo">
-                    <i class="fa-solid fa-check"></i>
-                    </button>
-                    <button class="edit-todo">
-                    <i class="fa-solid fa-pen"></i>
-                    </button>
-                    <button class="remove-todo">
-                    <i class="fa-solid fa-xmark"></i>
-                    </button>
-                </div>
-                <div class="todo">
-                    <h3>teste 3</h3>
-                    <button class="finish-todo">
-                    <i class="fa-solid fa-check"></i>
-                    </button>
-                    <button class="edit-todo">
-                    <i class="fa-solid fa-pen"></i>
-                    </button>
-                    <button class="remove-todo">
-                    <i class="fa-solid fa-xmark"></i>
-                    </button>
-                </div>
+        </div>
 
+        <div class="container-edit hide">
+            <div class="edit">
+                <form class="" id="edit-form">
+                    <p>Edite sua tarefa</p>
+                    <div class="form-control">
+                        <input type="text" id="edit-input">
+                        <button type="submit">
+                    <i class="fa-solid fa-check-double"></i>
+                </button>
+                    </div>
+                    <button class='cancel-btn' type='reset' id="cancel-edit-btn">Cancelar</button>
+                </form>
             </div>
         </div>
 
-        <div class="edit hide">
-            <form class="" id="edit-form">
-                <p>Edite sua tarefa</p>
-                <div class="form-control">
-                    <input type="text" id="edit-input">
-                    <button type="submit">
-                    <i class="fa-solid fa-check-double"></i>
-                </button>
-                </div>
-                <button class='cancel-btn' type='reset' id="cancel-edit-btn">Cancelar</button>
-            </form>
-        </div>
+
     </div>
 
     <script src="/js/script.js"></script>
