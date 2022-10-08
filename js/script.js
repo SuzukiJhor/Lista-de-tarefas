@@ -141,7 +141,7 @@ const filterTask = event => {
     }
 }
 
-const initial = () => {
+const initialLoad = () => {
     const keys = Object.keys(localStorage)
     keys.sort()
     keys.forEach((item) => {
@@ -191,4 +191,4 @@ cancelEditBtn.addEventListener('click', toggleForms)
 filterBtn.addEventListener('click', filterTask)
 document.addEventListener('click', selectClasses)
 
-initial()
+initialLoad()
