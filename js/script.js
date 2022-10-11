@@ -1,6 +1,5 @@
 const formTodo = document.querySelector('#todo-form')
 const formTodoInput = document.querySelector('#todo-input')
-const formSearch = document.querySelector('#search form')
 const searchInput = document.querySelector('#search-input')
 const editForm = document.querySelector('.container-edit')
 const editInput = document.querySelector('#edit-input')
@@ -73,18 +72,21 @@ const updateTodo = newText => {
 
 const searchTask = event => {
     event.preventDefault()
-    if (searchInput.value) {
-        const todos = document.querySelectorAll('.todo')
-        todos.forEach((item) => {
-            item.classList.add('hide')
-            if (searchInput.value.trim() == item.innerText.trim()) {
-                item.classList.remove('hide')
-            }
-        })
-    }
-    if (!searchInput.value) {
-        alert('O campo de busca esta vazio')
-    }
+
+    const inputValue = searchInput.value.trim().toLowerCase().replace(/\s/g, '')
+    const todos = Array.from(document.querySelectorAll('.todo'))
+
+    const todosVisible = todos.map(item => ({
+        item,
+        shouldBeVisible: item.innerText.toLowerCase().includes(inputValue)
+    }))
+
+    todosVisible.forEach(({ item, shouldBeVisible }) => {
+        item.classList.add('hide')
+        if (shouldBeVisible) {
+            item.classList.remove('hide')
+        }
+    })
 }
 
 const selectClasses = event => {
@@ -141,7 +143,7 @@ const filterTask = event => {
     }
 }
 
-const initialLoad = () => {
+const initialLoadLocalStorage = () => {
     const keys = Object.keys(localStorage)
     keys.sort()
     keys.forEach((item) => {
@@ -159,7 +161,6 @@ const show = {
         let done = document.querySelectorAll('.done')
         done.forEach((item) => {
             item.classList.remove('hide')
-
         })
     },
 
@@ -185,10 +186,10 @@ const show = {
 }
 
 formTodo.addEventListener('submit', setTodo)
-formSearch.addEventListener('submit', searchTask)
+searchInput.addEventListener('input', searchTask)
 editForm.addEventListener('submit', editTask)
 cancelEditBtn.addEventListener('click', toggleForms)
 filterBtn.addEventListener('click', filterTask)
 document.addEventListener('click', selectClasses)
 
-initialLoad()
+initialLoadLocalStorage()
