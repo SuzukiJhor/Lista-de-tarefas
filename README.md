@@ -1,6 +1,6 @@
 # Lista-de-tarefas
 
-Projeto desenvolvido com HTML, CSS e JavaScript puro, afim de melhoras minhas habilidades com desenvolvimento web!
+Projeto desenvolvido com HTML, CSS e JavaScript vanilla, afim de praticar minhas habilidades com desenvolvimento web!
 
 ## :hammer: Apresentação
 </br>
