@@ -1,6 +1,6 @@
 # Lista-de-tarefas
 
-Projeto desenvolvido com HTML, CSS e JavaScript vanilla, afim de praticar minhas habilidades com desenvolvimento web!
+Este é um projeto simples de lista de tarefas que estou desenvolvendo para praticar minhas habilidades. Fique à vontade para contribuir ou dar sugestões para melhorias!
 
 ## :hammer: Apresentação
 </br>
