@@ -1,6 +1,6 @@
-# Lista-de-tarefas
+# TO DO LIST
 This is a simple to-do list project that I'm developing to practice my skills. Feel free to contribute or provide suggestions for improvements!
-## :hammer: Apresentação
+## :hammer: Apresentation
 </br>
 
 
