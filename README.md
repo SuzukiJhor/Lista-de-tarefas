@@ -1,7 +1,5 @@
 # Lista-de-tarefas
-
-Este é um projeto simples de lista de tarefas que estou desenvolvendo para praticar minhas habilidades. Fique à vontade para contribuir ou dar sugestões para melhorias!
-
+This is a simple to-do list project that I'm developing to practice my skills. Feel free to contribute or provide suggestions for improvements!
 ## :hammer: Apresentação
 </br>
 
