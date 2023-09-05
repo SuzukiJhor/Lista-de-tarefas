@@ -1,5 +1,5 @@
 # TO DO LIST
-This is a simple to-do list project that I'm developing to practice my skills. Feel free to contribute or provide suggestions for improvements!
+This is a straightforward to-do list project that I've crafted using only HTML, CSS, and JavaScript as part of my skill enhancement journey. I welcome contributions and eagerly welcome any suggestions for enhancing it further!
 ## :hammer: Apresentation
 </br>
 
